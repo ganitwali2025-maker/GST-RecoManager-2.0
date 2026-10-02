@@ -299,8 +299,8 @@ export function DataTable<T extends { id?: string | number }>({
       </div>
 
       {/* Main Table Area with Sticky Headers */}
-      <div className="overflow-x-auto relative min-h-[220px]">
-        <table className="w-full text-xs text-left border-collapse">
+      <div className="overflow-auto relative min-h-[220px] max-h-[600px] custom-scrollbar">
+        <table className="w-full text-xs text-left border-collapse whitespace-nowrap">
           <thead className="bg-slate-50/90 text-slate-600 font-semibold border-b border-slate-200 sticky top-0 z-10 backdrop-blur-xs">
             <tr>
               {activeColumnsList.map((col) => (
@@ -343,7 +343,7 @@ export function DataTable<T extends { id?: string | number }>({
                 </td>
               </tr>
             ) : (
-              paginatedData.map((row, idx) => (
+              sortedData.map((row, idx) => (
                 <tr
                   key={row.id || idx}
                   onClick={() => onRowClick && onRowClick(row)}

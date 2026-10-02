@@ -37,10 +37,10 @@ export const KpiCard: React.FC<KpiCardProps> = ({
     >
       <div className="flex items-start justify-between">
         <div>
-          <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500">
+          <span className="text-[11px] font-medium uppercase tracking-wider text-slate-500">
             {title}
           </span>
-          <div className="text-2xl font-bold text-slate-900 mt-1 tracking-tight">
+          <div className="text-2xl font-extrabold text-slate-900 mt-1 tracking-tight">
             {value}
           </div>
         </div>

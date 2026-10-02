@@ -120,49 +120,6 @@ export const Gstr1View: React.FC<Gstr1ViewProps> = ({ entries }) => {
     {key: 'actions', header: 'Actions', align: 'center', render: (row) => (<div className='flex items-center justify-center gap-2'><button className='p-1.5 text-purple-600 bg-purple-50 rounded hover:bg-purple-100 transition-colors' title='View'><Eye className='w-[14px] h-[14px]' /></button><button className='p-1.5 text-blue-600 bg-blue-50 rounded hover:bg-blue-100 transition-colors' title='Edit'><Edit2 className='w-[14px] h-[14px]' /></button><button className='p-1.5 text-rose-600 bg-rose-50 rounded hover:bg-rose-100 transition-colors' title='Delete'><Trash2 className='w-[14px] h-[14px]' /></button><button className='p-1.5 text-slate-600 bg-slate-50 rounded hover:bg-slate-100 transition-colors' title='Audit'><FileText className='w-[14px] h-[14px]' /></button></div>)}
   ];
 
-  const leftToolbar = (
-    <div className="flex items-end gap-3">
-      <div className="space-y-1">
-        <label className="text-[11px] font-semibold text-[#6B7280] block ml-1">Financial Year</label>
-        <div className="relative flex items-center justify-between gap-[12px] h-[40px] px-[14px] bg-[#FFFFFF] border border-[#E5E7EB] rounded-[10px] cursor-pointer hover:border-[#6D28D9] transition-colors min-w-[145px]">
-          <div className="flex items-center gap-[9px] min-w-0">
-            <Calendar className="w-[18px] h-[18px] shrink-0 text-[#6D28D9]" />
-            <span className="text-[13px] font-semibold text-[#1F2937] whitespace-nowrap overflow-hidden text-ellipsis">FY 2026-27</span>
-          </div>
-          <ChevronDown className="w-[16px] h-[16px] shrink-0 text-[#6B7280]" />
-          <select className="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
-            <option>FY 2026-27</option>
-          </select>
-        </div>
-      </div>
-      <div className="space-y-1">
-        <label className="text-[11px] font-semibold text-[#6B7280] block ml-1">Quarter</label>
-        <div className="relative flex items-center justify-between gap-[12px] h-[40px] px-[14px] bg-[#FFFFFF] border border-[#E5E7EB] rounded-[10px] cursor-pointer hover:border-[#6D28D9] transition-colors min-w-[155px]">
-          <div className="flex items-center gap-[9px] min-w-0">
-            <PieChart className="w-[18px] h-[18px] shrink-0 text-[#6D28D9]" />
-            <span className="text-[13px] font-semibold text-[#1F2937] whitespace-nowrap overflow-hidden text-ellipsis">Q2 (Jul-Sep)</span>
-          </div>
-          <ChevronDown className="w-[16px] h-[16px] shrink-0 text-[#6B7280]" />
-          <select className="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
-            <option>Q2 (Jul-Sep)</option>
-          </select>
-        </div>
-      </div>
-      <div className="space-y-1">
-        <label className="text-[11px] font-semibold text-[#6B7280] block ml-1">Month</label>
-        <div className="relative flex items-center justify-between gap-[12px] h-[40px] px-[14px] bg-[#FFFFFF] border border-[#E5E7EB] rounded-[10px] cursor-pointer hover:border-[#6D28D9] transition-colors min-w-[165px]">
-          <div className="flex items-center gap-[9px] min-w-0">
-            <Calendar className="w-[18px] h-[18px] shrink-0 text-[#6D28D9]" />
-            <span className="text-[13px] font-semibold text-[#1F2937] whitespace-nowrap overflow-hidden text-ellipsis">September 2026</span>
-          </div>
-          <ChevronDown className="w-[16px] h-[16px] shrink-0 text-[#6B7280]" />
-          <select className="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
-            <option>September 2026</option>
-          </select>
-        </div>
-      </div>
-    </div>
-  );
 
   const importBtn = (
     <button 
@@ -170,15 +127,15 @@ export const Gstr1View: React.FC<Gstr1ViewProps> = ({ entries }) => {
       className="flex items-center justify-center gap-2 h-[40px] px-4 rounded-[10px] bg-[#6D28D9] hover:bg-[#5B21B6] text-white text-[13px] font-bold shadow-lg shadow-[#6D28D9]/20 transition-colors shrink-0"
     >
       <UploadCloud className="w-[18px] h-[18px]" />
-      + Import
+      Import
     </button>
   );
 
   return (
     <div className="space-y-6">
       
-      {/* 2. KPI Cards Block */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 xl:grid-cols-6 gap-4">
+      {/* KPI Cards Block */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
         <KpiCard
           title="Total Sales"
           value={formatINR(totalSales, { compact: true })}
@@ -241,56 +198,40 @@ export const Gstr1View: React.FC<Gstr1ViewProps> = ({ entries }) => {
         />
       </div>
 
-      
-      {/* 1. Header & Tabs Block */}
-      <div className="bg-[#FFFFFF] rounded-[16px] p-6 border border-[#E5E7EB] shadow-sm space-y-6">
-        <div className="flex flex-wrap items-center justify-between gap-4">
-          <div>
-            <h2 className="text-[20px] font-bold text-[#1F2937]">GSTR-1 Outward Supplies Register</h2>
-            <p className="text-[13px] text-[#6B7280] mt-1">
-              Tax invoice generation, e-Invoice IRN QR integration, and offline JSON return payload compiler.
-            </p>
-          </div>
-
-          
-        </div>
-
-        {/* Tabs */}
-        <div className="flex overflow-x-auto gap-2 pt-2 custom-scrollbar">
-          {[
-            { id: 'B2B', label: 'B2B Regular (4A, 4B)' },
-            { id: 'B2C', label: 'B2C Large & Small (5, 7)' },
-            { id: 'CDNR', label: 'Credit Note (9B Reg)' },
-            { id: 'CDNUR', label: 'Debit Note (9B Unreg)' },
-            { id: 'EXP', label: 'Exports (6A)' },
-            { id: 'NIL', label: 'Nil Rated (8A)' },
-            { id: 'EXEMPT', label: 'Exempted (8B)' },
-            { id: 'HSN', label: 'HSN Summary (12)' },
-          ].map((tab) => (
-            <button
-              key={tab.id}
-              onClick={() => setActiveTab(tab.id as typeof activeTab)}
-              className={`h-[40px] px-4 rounded-[10px] text-[13px] font-bold whitespace-nowrap transition-all border ${
-                activeTab === tab.id
-                  ? 'bg-[#6D28D9] border-[#6D28D9] text-white shadow-lg shadow-[#6D28D9]/20'
-                  : 'bg-[#FFFFFF] border-[#E5E7EB] text-[#6B7280] hover:border-[#6D28D9] hover:text-[#6D28D9] hover:bg-[#F5F3FF]'
-              }`}
-            >
-              {tab.label}
-            </button>
-          ))}
-        </div>
+      {/* Tabs */}
+      <div className="flex overflow-x-auto gap-3 py-1 custom-scrollbar pb-2">
+        {[
+          { id: 'B2B', label: 'B2B Regular (4A, 4B)', icon: <FileText className="w-4 h-4" /> },
+          { id: 'B2C', label: 'B2C Large & Small (5, 7)', icon: <ReceiptText className="w-4 h-4" /> },
+          { id: 'CDNR', label: 'Credit Note (9B Reg)', icon: <FileText className="w-4 h-4" /> },
+          { id: 'CDNUR', label: 'Debit Note (9B Unreg)', icon: <FileText className="w-4 h-4" /> },
+          { id: 'EXP', label: 'Exports (6A)', icon: <UploadCloud className="w-4 h-4" /> },
+          { id: 'NIL', label: 'Nil Rated (8A)', icon: <FileText className="w-4 h-4" /> },
+          { id: 'EXEMPT', label: 'Exempted (8B)', icon: <FileText className="w-4 h-4" /> },
+          { id: 'HSN', label: 'HSN Summary (12)', icon: <TrendingUp className="w-4 h-4" /> },
+        ].map((tab) => (
+          <button
+            key={tab.id}
+            onClick={() => setActiveTab(tab.id as typeof activeTab)}
+            className={`flex items-center gap-2 h-[42px] px-5 rounded-[12px] text-[13px] font-bold whitespace-nowrap transition-all border shadow-sm ${
+              activeTab === tab.id
+                ? 'bg-[#6D28D9] border-[#6D28D9] text-white shadow-lg shadow-[#6D28D9]/20'
+                : 'bg-white border-[#E5E7EB] text-[#6B7280] hover:border-[#6D28D9] hover:text-[#6D28D9] hover:bg-[#F5F3FF]'
+            }`}
+          >
+            {tab.icon}
+            {tab.label}
+          </button>
+        ))}
       </div>
-
       
-      {/* 3. Table Block */}
-      <div className="bg-[#FFFFFF] border border-[#E5E7EB] rounded-[16px] shadow-sm">
+      {/* Table Block */}
+      <div className="bg-[#FFFFFF] rounded-[16px] shadow-sm">
         <DataTable
           data={entries}
           columns={columns}
           searchPlaceholder="Search Financial Year, GSTIN, Party Name, Invoice No..."
           searchFields={['customerName', 'customerGstin', 'invoiceNo', 'financialYear']}
-          
           toolbarAction={importBtn}
         />
       </div>
@@ -300,11 +241,10 @@ export const Gstr1View: React.FC<Gstr1ViewProps> = ({ entries }) => {
           onClose={() => setIsImportModalOpen(false)} 
           onImportSuccess={(count) => {
             setIsImportModalOpen(false);
-            alert(`✅ ${count} records imported successfully.`);
+            alert(`${count} records imported successfully.`);
           }}
         />
       )}
     </div>
   );
 };
-

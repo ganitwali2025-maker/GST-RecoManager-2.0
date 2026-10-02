@@ -14,7 +14,7 @@ import {
   BookOpen,
   ReceiptText,
   Sliders,
-  RotateCw,
+  Menu,
   Sparkles,
   ChevronRight,
   Database
@@ -135,15 +135,15 @@ export const Sidebar: React.FC<SidebarProps> = ({
           )}
         </div>
 
-        {/* Circular Arrow Collapse Button (Matching Reference) */}
-        <button
-          onClick={onToggleCollapse}
-          className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 border border-white/15 flex items-center justify-center text-purple-200 hover:text-white transition-all shadow-xs shrink-0"
-          title={collapsed ? 'Expand Sidebar' : 'Collapse Sidebar'}
-        >
-          <RotateCw className={`w-[18px] h-[18px] transition-transform duration-300 ${collapsed ? 'rotate-180' : ''}`} />
-        </button>
-      </div>
+      {/* Hamburger Collapse Button (Matching Reference) */}
+      <button
+        onClick={onToggleCollapse}
+        className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 border border-white/15 flex items-center justify-center text-purple-200 hover:text-white transition-all shadow-xs shrink-0"
+        title={collapsed ? 'Expand Sidebar' : 'Collapse Sidebar'}
+      >
+        <Menu className={`w-[18px] h-[18px] transition-transform duration-300 ${collapsed ? 'rotate-180' : ''}`} />
+      </button>
+    </div>
 
       {/* Navigation Links */}
       <div className="flex-1 overflow-y-auto py-3 px-3 space-y-4 scrollbar-hide">
@@ -151,7 +151,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
           <div key={sIdx} className="space-y-1">
             {/* Section Header */}
             {!collapsed ? (
-              <div className="px-3 pt-2 pb-1 text-[10px] font-bold tracking-widest text-purple-300/80 uppercase font-mono">
+              <div className="px-3 pt-2 pb-1 text-[10px] font-semibold tracking-widest text-purple-300/80 uppercase">
                 {section.title}
               </div>
             ) : (

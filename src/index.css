@@ -2,8 +2,8 @@
 
 @theme {
   /* Typography */
-  --font-sans: "Lora", serif;
-  --font-serif: "Lora", serif;
+  --font-sans: "Inter", sans-serif;
+  --font-serif: "Inter", sans-serif;
   
   --text-xs: 12px;
   --text-sm: 13px;
@@ -33,6 +33,7 @@
     font-family: var(--font-sans);
     font-size: 14px;
     -webkit-font-smoothing: antialiased;
+    font-feature-settings: "tnum" on, "lnum" on; /* Tabular numbers for accounting */
   }
 
   /* Components consistency enforcement */

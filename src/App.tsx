@@ -148,7 +148,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F7F7FB] text-slate-800 flex font-sans antialiased selection:bg-purple-600 selection:text-white">
+    <div className="min-h-screen bg-[#EDEBF3] text-slate-800 flex font-sans antialiased selection:bg-purple-600 selection:text-white">
       {/* Fixed Left Sidebar */}
       <Sidebar
         currentPage={currentPage}

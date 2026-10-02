@@ -61,7 +61,7 @@ export const Header: React.FC<HeaderProps> = ({
           ))}
         </div>
         <div className="flex items-center mt-1">
-          <h1 className="text-[20px] font-bold text-[#1F2937] leading-none tracking-tight">{pageTitle}</h1>
+          <h1 className="text-[20px] font-extrabold text-[#1F2937] leading-none tracking-tight">{pageTitle}</h1>
         </div>
       </div>
 
