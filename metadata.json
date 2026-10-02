@@ -1,0 +1,6 @@
+{
+  "name": "GST RecoManager",
+  "description": "Smart GST Reconciliation & Compliance Management enterprise ERP application for CAs, CFOs, and tax professionals.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

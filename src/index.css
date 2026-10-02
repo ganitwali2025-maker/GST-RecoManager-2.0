@@ -1,0 +1,92 @@
+@import "tailwindcss";
+
+@theme {
+  /* Typography */
+  --font-sans: "Lora", serif;
+  --font-serif: "Lora", serif;
+  
+  --text-xs: 12px;
+  --text-sm: 13px;
+  --text-base: 14px;
+  --text-lg: 18px;
+  --text-xl: 18px;
+  --text-2xl: 24px;
+  --text-3xl: 24px;
+  --text-4xl: 24px;
+  
+  /* Border Radius */
+  --radius-sm: 12px;
+  --radius-md: 12px;
+  --radius-lg: 12px;
+  --radius-xl: 12px;
+  --radius-2xl: 12px;
+  --radius-3xl: 12px;
+  
+  /* Layout Spacing Overrides to match requirements */
+  --spacing-72: 280px; /* Sidebar */
+  --spacing-20: 72px;  /* Collapsed Sidebar */
+  --spacing-16: 64px;  /* Topbar */
+}
+
+@layer base {
+  body {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Components consistency enforcement */
+  
+  /* Tables */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  th {
+    font-size: 13px !important;
+    height: 48px !important;
+    padding: 0 16px !important;
+    vertical-align: middle;
+  }
+  td {
+    font-size: 13px !important;
+    height: 48px !important;
+    padding: 0 16px !important;
+    vertical-align: middle;
+  }
+
+  /* Form Elements */
+  input[type="text"], input[type="email"], input[type="password"], input[type="number"], select, textarea {
+    height: 40px !important;
+    font-size: 13px !important;
+    border-radius: 12px !important;
+    padding: 0 16px !important;
+  }
+  
+  label {
+    font-size: 13px !important;
+  }
+
+  /* Buttons */
+  button {
+    font-size: 13px;
+    border-radius: 12px;
+  }
+  
+  /* Standard buttons (not icon buttons) */
+  button:not(.icon-only) {
+    /* We can't strictly enforce height on ALL buttons since some are small icon buttons in headers, 
+       but we can enforce it on buttons with text */
+  }
+}
+
+@layer utilities {
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+@media (max-width: 768px) { table { display: block; overflow-x: auto; white-space: nowrap; } }
