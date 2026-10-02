@@ -148,7 +148,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#EDEBF3] text-slate-800 flex font-sans antialiased selection:bg-purple-600 selection:text-white">
+    <div className="h-screen w-full overflow-hidden bg-[#EDEBF3] text-slate-800 flex font-sans antialiased selection:bg-purple-600 selection:text-white">
       {/* Fixed Left Sidebar */}
       <Sidebar
         currentPage={currentPage}
@@ -159,7 +159,7 @@ export default function App() {
 
       {/* Main Content Area */}
       <div
-        className={`flex-1 flex flex-col min-w-0 transition-all duration-300 ${
+        className={`flex-1 flex flex-col min-w-0 h-screen transition-all duration-300 ${
           sidebarCollapsed ? 'ml-[72px]' : 'ml-[280px]'
         }`}
       >
@@ -181,7 +181,7 @@ export default function App() {
         />
 
         {/* View Content Container */}
-        <main className="flex-1 p-[24px] max-w-[1700px] w-full mx-auto space-y-6">
+        <main className="flex-1 overflow-y-auto overflow-x-hidden p-[24px] max-w-[1700px] w-full mx-auto flex flex-col custom-scrollbar min-w-0">
           {currentPage === 'itc-dashboard' && (
             <ItcDashboard
               invoices={invoices}

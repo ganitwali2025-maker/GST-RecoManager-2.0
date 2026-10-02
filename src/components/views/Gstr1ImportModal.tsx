@@ -22,7 +22,7 @@ interface Gstr1ImportModalProps {
 
 export const Gstr1ImportModal: React.FC<Gstr1ImportModalProps> = ({ onClose, onImportSuccess }) => {
   const [step, setStep] = useState(1);
-  const [importMethod, setImportMethod] = useState<'upload' | 'paste' | null>(null);
+  const [importMethod, setImportMethod] = useState<'excel' | 'csv' | 'googlesheet' | null>(null);
   const [fy, setFy] = useState('');
   const [quarter, setQuarter] = useState('');
   const [month, setMonth] = useState('');
@@ -33,7 +33,7 @@ export const Gstr1ImportModal: React.FC<Gstr1ImportModalProps> = ({ onClose, onI
   const months = ['April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December', 'January', 'February', 'March'];
 
   const isPeriodSelected = fy && quarter && month;
-  const isDataReady = importMethod === 'paste' ? pastedData.length > 10 : importMethod === 'upload';
+  const isDataReady = !!importMethod;
 
   const handleNext = () => {
     if (step === 1 && isPeriodSelected) setStep(2);
@@ -154,54 +154,65 @@ export const Gstr1ImportModal: React.FC<Gstr1ImportModalProps> = ({ onClose, onI
                 <p className="text-[13px] text-[#6B7280] mt-1">Choose how you want to import your invoice data.</p>
               </div>
 
-              <div className="grid grid-cols-2 gap-6">
+              <div className="grid grid-cols-3 gap-6">
                 <button 
-                  onClick={() => setImportMethod('upload')}
-                  className={`p-6 border-2 rounded-[16px] flex flex-col items-center text-center transition-all ${importMethod === 'upload' ? 'border-[#6D28D9] bg-[#F5F3FF]' : 'border-[#E5E7EB] bg-[#FFFFFF] hover:border-[#6D28D9]/50'}`}
+                  onClick={() => setImportMethod('excel')}
+                  className={`p-6 border-2 rounded-[16px] flex flex-col items-center text-center transition-all ${importMethod === 'excel' ? 'border-[#6D28D9] bg-[#F5F3FF]' : 'border-[#E5E7EB] bg-[#FFFFFF] hover:border-[#6D28D9]/50'}`}
                 >
-                  <div className={`w-[48px] h-[48px] rounded-full flex items-center justify-center mb-4 ${importMethod === 'upload' ? 'bg-[#6D28D9] text-white' : 'bg-slate-100 text-[#6B7280]'}`}>
-                    <FileJson className="w-[24px] h-[24px]" />
+                  <div className={`w-[48px] h-[48px] rounded-full flex items-center justify-center mb-4 ${importMethod === 'excel' ? 'bg-[#6D28D9] text-white' : 'bg-slate-100 text-[#6B7280]'}`}>
+                    <FileText className="w-[24px] h-[24px]" />
                   </div>
-                  <h4 className="text-[15px] font-bold text-[#1F2937]">Upload JSON File</h4>
-                  <p className="text-[13px] text-[#6B7280] mt-2">Upload GST portal generated JSON or ERP JSON payload.</p>
+                  <h4 className="text-[15px] font-bold text-[#1F2937]">Upload Excel</h4>
+                  <p className="text-[13px] text-[#6B7280] mt-2">Import data from .xlsx or .xls files.</p>
                 </button>
 
                 <button 
-                  onClick={() => setImportMethod('paste')}
-                  className={`p-6 border-2 rounded-[16px] flex flex-col items-center text-center transition-all ${importMethod === 'paste' ? 'border-[#6D28D9] bg-[#F5F3FF]' : 'border-[#E5E7EB] bg-[#FFFFFF] hover:border-[#6D28D9]/50'}`}
+                  onClick={() => setImportMethod('csv')}
+                  className={`p-6 border-2 rounded-[16px] flex flex-col items-center text-center transition-all ${importMethod === 'csv' ? 'border-[#6D28D9] bg-[#F5F3FF]' : 'border-[#E5E7EB] bg-[#FFFFFF] hover:border-[#6D28D9]/50'}`}
                 >
-                  <div className={`w-[48px] h-[48px] rounded-full flex items-center justify-center mb-4 ${importMethod === 'paste' ? 'bg-[#6D28D9] text-white' : 'bg-slate-100 text-[#6B7280]'}`}>
+                  <div className={`w-[48px] h-[48px] rounded-full flex items-center justify-center mb-4 ${importMethod === 'csv' ? 'bg-[#6D28D9] text-white' : 'bg-slate-100 text-[#6B7280]'}`}>
                     <FileText className="w-[24px] h-[24px]" />
                   </div>
-                  <h4 className="text-[15px] font-bold text-[#1F2937]">Copy / Paste Data</h4>
-                  <p className="text-[13px] text-[#6B7280] mt-2">Paste Excel, CSV or tab-separated data directly.</p>
+                  <h4 className="text-[15px] font-bold text-[#1F2937]">Upload CSV</h4>
+                  <p className="text-[13px] text-[#6B7280] mt-2">Upload comma-separated values format.</p>
+                </button>
+
+                <button 
+                  onClick={() => setImportMethod('googlesheet')}
+                  className={`p-6 border-2 rounded-[16px] flex flex-col items-center text-center transition-all ${importMethod === 'googlesheet' ? 'border-[#6D28D9] bg-[#F5F3FF]' : 'border-[#E5E7EB] bg-[#FFFFFF] hover:border-[#6D28D9]/50'}`}
+                >
+                  <div className={`w-[48px] h-[48px] rounded-full flex items-center justify-center mb-4 ${importMethod === 'googlesheet' ? 'bg-[#6D28D9] text-white' : 'bg-slate-100 text-[#6B7280]'}`}>
+                    <Database className="w-[24px] h-[24px]" />
+                  </div>
+                  <h4 className="text-[15px] font-bold text-[#1F2937]">Import from Google Sheet</h4>
+                  <p className="text-[13px] text-[#6B7280] mt-2">Connect and sync directly from G-Sheets.</p>
                 </button>
               </div>
 
-              {importMethod === 'upload' && (
+              {(importMethod === 'excel' || importMethod === 'csv') && (
                 <div className="mt-8 border-2 border-dashed border-[#E5E7EB] rounded-[16px] bg-[#FFFFFF] p-10 flex flex-col items-center justify-center">
                   <UploadCloud className="w-[48px] h-[48px] text-[#6B7280] mb-4" />
-                  <h4 className="text-[16px] font-bold text-[#1F2937]">Upload GSTR-1 JSON</h4>
-                  <p className="text-[13px] text-[#6B7280] mt-1 mb-6">Drag & Drop your JSON file here</p>
+                  <h4 className="text-[16px] font-bold text-[#1F2937]">Upload {importMethod === 'excel' ? 'Excel' : 'CSV'} File</h4>
+                  <p className="text-[13px] text-[#6B7280] mt-1 mb-6">Drag & Drop your file here</p>
                   <button className="h-[40px] px-6 bg-[#FFFFFF] border border-[#E5E7EB] text-[#1F2937] text-[13px] font-bold rounded-[10px] hover:border-[#6D28D9] hover:text-[#6D28D9] transition-colors">
                     Browse File
                   </button>
-                  <p className="text-[12px] text-[#6B7280] mt-4 font-mono">Supported format: .JSON</p>
+                  <p className="text-[12px] text-[#6B7280] mt-4 font-mono">Supported format: {importMethod === 'excel' ? '.xlsx, .xls' : '.csv'}</p>
                 </div>
               )}
 
-              {importMethod === 'paste' && (
+              {importMethod === 'googlesheet' && (
                 <div className="mt-8 space-y-4">
-                  <h4 className="text-[15px] font-bold text-[#1F2937]">Paste GSTR-1 Data</h4>
-                  <textarea 
-                    value={pastedData}
-                    onChange={(e) => setPastedData(e.target.value)}
-                    className="w-full h-[200px] p-4 bg-[#FFFFFF] border border-[#E5E7EB] rounded-[12px] text-[13px] font-mono text-[#1F2937] focus:outline-none focus:border-[#6D28D9] focus:ring-1 focus:ring-[#6D28D9]"
-                    placeholder="Paste Excel, CSV, tab-separated or JSON data here...&#10;&#10;GSTIN&#9;Party Name&#9;Invoice Number&#9;Taxable Amount..."
+                  <h4 className="text-[15px] font-bold text-[#1F2937]">Google Sheet Link</h4>
+                  <input 
+                    type="text"
+                    className="w-full h-[40px] px-4 bg-[#FFFFFF] border border-[#E5E7EB] rounded-[10px] text-[13px] text-[#1F2937] focus:outline-none focus:border-[#6D28D9] focus:ring-1 focus:ring-[#6D28D9]"
+                    placeholder="Paste Google Sheet URL here..."
                   />
+                  <p className="text-[12px] text-[#6B7280]">Make sure the sheet is public or shared with our service account.</p>
                   <div className="flex justify-end">
                     <button className="h-[40px] px-6 bg-[#6D28D9] text-white text-[13px] font-bold rounded-[10px] hover:bg-[#5B21B6] transition-colors shadow-lg shadow-[#6D28D9]/20">
-                      Parse Data
+                      Connect Sheet
                     </button>
                   </div>
                 </div>

@@ -46,7 +46,7 @@ export const Header: React.FC<HeaderProps> = ({
   const financialYears = ['FY 2026-27', 'FY 2025-26', 'FY 2024-25'];
 
   return (
-    <header className="sticky top-0 z-30 bg-[#FFFFFF] border-b border-[#E5E7EB] h-[64px] px-6 flex items-center justify-between border-l-[4px] border-l-[#6D28D9]">
+    <header className="sticky top-0 z-30 bg-[#FFFFFF] border-b border-[#E5E7EB] h-[64px] px-6 flex items-center justify-between">
       {/* Left: Title & Breadcrumbs */}
       <div className="flex flex-col justify-center h-full">
         <div className="flex items-center gap-2 text-[12px] text-[#6B7280] font-medium leading-tight">
